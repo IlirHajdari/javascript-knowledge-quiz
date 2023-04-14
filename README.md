@@ -10,4 +10,4 @@ Good Luck!
 
 ![Image of the complete website](./assets/images/image.png)
 
-![Visit the Website](https://ilirhajdari.github.io/javascript-knowledge-quiz/)
+[Visit the Website](https://ilirhajdari.github.io/javascript-knowledge-quiz/)
