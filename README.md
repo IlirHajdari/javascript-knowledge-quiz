@@ -9,3 +9,5 @@ To get started, click on the start button. This will start the timer and present
 Good Luck!
 
 ![Image of the complete website](./assets/images/image.png)
+
+![Visit the Website](https://ilirhajdari.github.io/javascript-knowledge-quiz/)
