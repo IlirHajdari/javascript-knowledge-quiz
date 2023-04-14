@@ -126,76 +126,71 @@ var displayNextQuestion = function () {
     if (questionCount < questionArr.length) {
       setTimeout(displayNextQuestion, 500);
     } else {
-      //Added slight delay to ensure that 'Correct' was shown to the user
-      // after selecting the last answer before being brought
-      // to enter initials
-      setTimeout(() => {
-        questionSection.classList.add("display");
-        document.getElementById("final-score").textContent =
-          "Final score: " + timeLeft;
-        highscoreSection.classList.remove("display");
-        console.log("stop");
-        clearInterval(countdownTimer);
-      }, 500);
+      questionSection.classList.add("display");
+      document.getElementById("final-score").textContent =
+        "Final score: " + timeLeft;
+      highscoreSection.classList.remove("display");
+      console.log("stop");
+      clearInterval(countdownTimer);
     }
   });
+});
 
-  // Function to display score to user at the end of the quiz
-  var displayScore = function () {
-    var initialInput = JSON.parse(localStorage.getItem("initialInput"));
-    if (initialInput) {
-      storeScore = initialInput;
-      scoreResults.textContent = "";
-      for (i = 0; i < storeScore.length; i++) {
-        var li = document.createElement("li");
-        li.textContent = storeScore[i];
-        scoreResults.appendChild(li);
-      }
+// Function to display score to user at the end of the quiz
+var displayScore = function () {
+  var initialInput = JSON.parse(localStorage.getItem("initialInput"));
+  if (initialInput) {
+    storeScore = initialInput;
+    scoreResults.textContent = "";
+    for (i = 0; i < storeScore.length; i++) {
+      var li = document.createElement("li");
+      li.textContent = storeScore[i];
+      scoreResults.appendChild(li);
     }
-  };
+  }
+};
+displayScore();
+
+// Start button, allows user to start the quiz
+startButtonEl.addEventListener("click", function () {
+  countdown();
+  questionSection.classList.remove("display");
+  introSection.classList.add("display");
+  displayNextQuestion();
+});
+
+// Submit button, allows users to submit initials and score at the end of the test
+submitButtonEl.addEventListener("click", function () {
+  storeScore.push(
+    initialsEl.value + " - " + timerEl.textContent.replace("Time:", "")
+  );
+  localStorage.setItem("initialInput", JSON.stringify(storeScore));
+  highscoreSection.classList.add("display");
+  dashboardSection.classList.remove("display");
   displayScore();
+});
 
-  // Start button, allows user to start the quiz
-  startButtonEl.addEventListener("click", function () {
-    countdown();
-    questionSection.classList.remove("display");
-    introSection.classList.add("display");
-    displayNextQuestion();
-  });
+// View highscore link, allows users to click and view scores
+viewHighScore.addEventListener("click", function () {
+  introSection.classList.add("display");
+  dashboardSection.classList.remove("display");
+});
 
-  // Submit button, allows users to submit initials and score at the end of the test
-  submitButtonEl.addEventListener("click", function () {
-    storeScore.push(
-      initialsEl.value + " - " + timerEl.textContent.replace("Time:", "")
-    );
-    localStorage.setItem("initialInput", JSON.stringify(storeScore));
-    highscoreSection.classList.add("display");
-    dashboardSection.classList.remove("display");
-    displayScore();
-  });
+// Return button, resets the timer and the questionCount and returns user to beginning screen
+returnButtonEl.addEventListener("click", function () {
+  // Reset the timer
+  timeLeft = 75;
+  timerEl.textContent = "Time: 75";
+  questionCount = 0;
+  introSection.classList.remove("display");
+  dashboardSection.classList.add("display");
+  highscoreSection.classList.add("display");
+  questionSection.classList.add("display");
+  answersEl.textContent = "";
+});
 
-  // View highscore link, allows users to click and view scores
-  viewHighScore.addEventListener("click", function () {
-    introSection.classList.add("display");
-    dashboardSection.classList.remove("display");
-  });
-
-  // Return button, resets the timer and the questionCount and returns user to beginning screen
-  returnButtonEl.addEventListener("click", function () {
-    // Reset the timer
-    timeLeft = 75;
-    timerEl.textContent = "Time: 75";
-    questionCount = 0;
-    introSection.classList.remove("display");
-    dashboardSection.classList.add("display");
-    highscoreSection.classList.add("display");
-    questionSection.classList.add("display");
-    answersEl.textContent = "";
-  });
-
-  // Clear button, clears the users scores
-  clearButtonEl.addEventListener("click", function () {
-    localStorage.removeItem("initialInput");
-    scoreResults.innerHTML = "";
-  });
+// Clear button, clears the users scores
+clearButtonEl.addEventListener("click", function () {
+  localStorage.removeItem("initialInput");
+  scoreResults.innerHTML = "";
 });
