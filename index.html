@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>JavaScript Code Quiz</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+  </head>
+  <body>
+    <!-- This creates the "View High Scores" link that users can click on-->
+    <header class="header">
+      <p class="high-score">View High Scores</p>
+      <p id="timer"></p>
+    </header>
+
+    <!-- The main section has all of the different quiz sections -->
+    <!-- Which will look similar to cards once CSS is created -->
+    <main>
+      <section class="intro-section">
+        <h1 class="quiz-title">Coding Quiz</h1>
+        <h3>
+          Answer the questions before the timer runs out! <br />
+          Incorrect answers will reduce your time by ten seconds!
+        </h3>
+        <button class="btn" type="button" id="start-quiz">Start</button>
+      </section>
+
+      <section class="question-section display">
+        <h1 id="question-title">Commonly used data types DO NOT include:</h1>
+        <ul id="questions">
+          <li>
+            <button class="answers" type="button" id="a">1. strings</button>
+          </li>
+          <li>
+            <button class="answers" type="button" id="b">2. booleans</button>
+          </li>
+          <li>
+            <button class="answers" type="button" id="c">3. alerts</button>
+          </li>
+          <li>
+            <button class="answers" type="button" id="d">4. numbers</button>
+          </li>
+        </ul>
+        <p id="answers"></p>
+      </section>
+
+      <!-- Below are sections the user interacts with once the quiz is over -->
+      <section class="high-score-section display">
+        <h1 id="all-done">All Done!</h1>
+        <p id="final-score">Final score:</p>
+        <div class="initial-entry">
+          <label for="initials">Enter your initials</label>
+          <input type="text" id="initials" />
+          <button type="button" id="submit">Submit</button>
+        </div>
+      </section>
+
+      <section class="dashboard-section display">
+        <h1 id="score-title">High Scores</h1>
+        <ol id="score-results"></ol>
+        <button type="button" id="return">Return</button>
+        <button type="button" id="clear">Clear</button>
+      </section>
+    </main>
+    <!-- The End of Main -->
+
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
